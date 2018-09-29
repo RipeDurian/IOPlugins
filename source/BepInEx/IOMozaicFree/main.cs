@@ -10,21 +10,27 @@ using UnityEngine.SceneManagement;
 
 namespace IOMozaicFree
 {
-    [BepInPlugin(GUID: "IOMozaicFree", Name: "RipeDurian.InsultOrder.Uncensored", Version: "0.1")]
-    public class Uncensorerd : BaseUnityPlugin
+    [BepInPlugin(GUID: "IOMozaicFree", Name: "RipeDurian.InsultOrder.IOMozaicFree", Version: "0.1")]
+    public class Uncensored : BaseUnityPlugin
     {
         private string[] MonitorObjects;
         public void Start()
         {
-            Logger.Log(LogLevel.Debug, "[IOMozaicFree] Init Monitored GameObject Paths.");
+            /*
+                Bruteforcing through and disabling all gameobjects with "moza" in their name 
+                might cause problems, so this is a more controlled approach
+            */
+
+            debugmsg("Init GameObject Paths");
 
             MonitorObjects = new string[]
                 {
                     // Solo
 
-                    "/PC00/PC0000/PC00_ute05_moza",             // Neko Cross-section Vagina
-                    "/PC00/PC0000/PC00_ute05_moza_ANA",         // Neko Cross-section Anal
+                    "/PC00/PC0000/PC00_ute05_moza",             // Cross-section Vagina
+                    "/PC00/PC0000/PC00_ute05_moza_ANA",         // Cross-section Anal
                     "/PC00/PC0000/PC_moza",                     // MC Penis
+                    "/PC00/PC0000/PC00_mozaAnal",               // MC Anal
                     "/CH01/CH0001/CH01_moza",                   // Neko Vagina
                     "/CH01/CH0001/CH01_mozaAnal",               // Neko Anal
                     "/CH02/CH0002/CH01_moza",                   // Bunny Vagina
@@ -41,27 +47,19 @@ namespace IOMozaicFree
                     "/SY02/SY0002/SY_moza",                     // Shota 2
                     "/SY03/SY0003/SY_moza"                      // Shota 3
                 };
-
-            SceneManager.activeSceneChanged += ChangedActiveScene;
         }
 
         public void Update()
         {
             // Executing this on every frame is overkill, but oh well
-            decensor();
+
+            uncensor();
         }
 
-        private void ChangedActiveScene(Scene current, Scene next)
+        private void uncensor()
         {
-            //Logger.Log(LogLevel.Debug, "[IOMozaicFree] Changed Scene");
-            //if(next != null)
-            //    Logger.Log(LogLevel.Debug, "[IOMozaicFree] New Scene: " + next.name);
-            //decensor();
-        }
+            // Crashes if not executed on main thread
 
-        private void decensor()
-        {
-            //Crashes if not executed on main thread.
             var customdelegate = new Action<object>(delegate (object param)
             {
                 try
@@ -71,7 +69,7 @@ namespace IOMozaicFree
                         GameObject gameObject = GameObject.Find(objectPath);
                         if (gameObject != null && gameObject.activeSelf)
                         {
-                            Logger.Log(LogLevel.Debug, "[IOMozaicFree] Disabling " + objectPath);
+                            debugmsg("Disabling " + objectPath);
                             gameObject.SetActive(false);
                         }
                     }
@@ -80,11 +78,14 @@ namespace IOMozaicFree
                 {
                     Logger.Log(LogLevel.Error, ex.ToString());
                 }
-                Resources.UnloadUnusedAssets();
             });
 
             customdelegate.Invoke(null);
         }
 
+        private void debugmsg(string text)
+        {
+            Logger.Log(LogLevel.Debug, "[IOMozaicFree] " + text);
+        }
     }
 }

@@ -1,5 +1,13 @@
 # Plugins for Insult Order
 
+## Plugins Description
+**IOMozaicFree**: "Uncensores" or rather it removes mozaics from the private parts
+
+**IOTextureReplacer**: Replaces Textures based on filename (currently only png files supported)
+  - PNG files must be placed into /images directory with their original name
+  - Press Alt+F11 do dump all textures from the current scene into /dump/*scenename*
+
+
 ## BepInEx Plugins Installation
 
 1. Install the 32bit (x86) Version of [BepInEx Plugin Manager](https://github.com/BepInEx/BepInEx/releases) -> [Wiki installation Steps](https://github.com/BepInEx/BepInEx/wiki/Installation)

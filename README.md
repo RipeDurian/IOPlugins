@@ -4,8 +4,8 @@
 **IOMozaicFree**: "Uncensores" or rather it removes mozaics from the private parts
 
 **IOTextureReplacer**: Replaces Textures based on filename (currently only png files supported)
-  - PNG files must be placed into /images directory with their original name
-  - Press Alt+F11 do dump all textures from the current scene into /dump/*scenename*
+  - PNG files must be placed into /bepinex/images directory with their original filename
+  - Press Alt+F11 do dump all textures from the current scene into bepinex/dump/*scenename*
 
 
 ## BepInEx Plugins Installation

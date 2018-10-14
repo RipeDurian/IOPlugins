@@ -12,7 +12,7 @@ using Logger = BepInEx.Logger;
 namespace IOTextureReplacer
 {
     [BepInPlugin(GUID: "IOTextureReplacer", Name: "RipeDurian.InsultOrder.IOTextureReplacer", Version: "0.1")]
-    public class main : BaseUnityPlugin
+    public class IOTextureReplacer : BaseUnityPlugin
     {
         public string imagesPath { get; set; }
         public string imagesDumpPath { get; set; }

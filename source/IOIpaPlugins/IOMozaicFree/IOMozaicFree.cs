@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 
 namespace IOMozaicFreeIPA
 {
-    public class main : IPlugin     
+    public class IOMozaicFree : IPlugin
     {
         public string Name
         {
